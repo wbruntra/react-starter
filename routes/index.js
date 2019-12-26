@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   } else {
     req.session.visits = visits + 1;
   }
-  res.send({ status: 'Online' });
+  res.send({ status: 'Online', visit: req.session.visits });
 });
 
 module.exports = router;

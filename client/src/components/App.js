@@ -1,37 +1,33 @@
-import React, { Component } from 'react';
-import './App.scss';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import './App.scss'
+import axios from 'axios'
+import * as actions from '../actions'
 
-class App extends Component {
+const App = () => {
+  const status = useSelector((state) => state.status)
 
-  getStatus = () => {
-    axios.get('/api').then(res => {
-      const { status } = res.data;
-      console.log(status);
-      this.props.updateStatus(status);
-    })
-      .catch(err => {
-        this.props.updateStatus('Offline')
+  const dispatch = useDispatch()
+
+  const getStatus = () => {
+    axios
+      .get('/api')
+      .then((res) => {
+        const { status } = res.data
+        console.log(status)
+        dispatch(actions.updateStatus(status))
+      })
+      .catch((err) => {
+        dispatch(actions.updateStatus('Offline'))
       })
   }
 
-  render() {
-    return (
-      <div className="App">
-        <p>
-          Current status: {this.props.status}
-        </p>
-        <button onClick={this.getStatus}>Update</button>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <p>Current status: {status}</p>
+      <button onClick={getStatus}>Update</button>
+    </div>
+  )
 }
 
-export default connect(
-  (state) => ({
-    status: state.status,
-  }),
-  actions,
-)(App);
+export default App
