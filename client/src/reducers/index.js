@@ -1,7 +1,7 @@
-import status from './statusReducer';
+import status from './statusReducer'
 
 const reducers = {
   status,
-};
+}
 
-export default reducers;
+export default reducers

@@ -1,4 +1,4 @@
-import { UPDATE_STATUS } from './actionTypes';
+import { UPDATE_STATUS } from './actionTypes'
 
 export const updateStatus = (status) => {
   return {
